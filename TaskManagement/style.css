@@ -1,0 +1,97 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+}
+
+.navbar{
+    height: 10vh;
+}
+
+button{
+    width: 10vw;
+    height: 3vh;
+    border-radius: 50px;
+}
+
+.mainContent{
+    height: 95vh;
+    display: flex;
+    .leftMainContent{
+        width: 65vw;
+        margin-left: 3vw;
+        .leftHeader{
+            height: 15vh;
+        }
+        .leftContent{
+            .tableHeader{
+                display: flex;
+                height: 15vh;
+            }
+            .tableContent{
+                display: flex;
+                flex-direction: column;
+                .tableRow{
+                    height: 6vh;
+                    display: flex;
+                }
+            }
+            .category{
+                width: 25%;
+            }
+            .subCategory{
+                width: 25%;
+            }
+            .duration{
+                width: 25%;
+            }
+            .task{
+                width: 25%;
+            }
+        }
+    }
+    .rightMainContent{
+        width: 35vw;
+        display: flex;
+        flex-direction: column;
+        .topButtons{
+            height: 20vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .middleContent{
+            height: 65vh;
+            display: flex;
+            flex-direction: column;
+            .heading{
+                height: 10vh;
+                align-self: center;
+                justify-content: center;
+                display: flex;
+            }
+            .inputSet{
+                height: 55vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                input, select{
+                    width: 70%;
+                }
+                .buttons{
+                    display: flex;
+                    width: 70%;
+                    justify-content: space-evenly;
+                }
+            }
+        }
+        .bottomTimer{
+            height: 15vh;
+            display: flex;
+            align-items: start;
+            justify-content: center;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+button{
+    width: 10vw;
+    height: 3vh;
+    border-radius: 50px;
+}
+
+
+.container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    .loginForm{
+        display: flex;
+        flex-direction: column;
+        height: 50vh;
+        width: 40vw;
+        align-items: center;
+        justify-content: space-evenly;
+        .inputs{
+            height: 15vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            input{
+                width: 20vw;
+                height: 3vh;
+                border-radius: 50px;
+            }
+        }
+        .footer{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 10vh;
+            h6{
+                margin: 0;
+            }
+        }
+    }
+}
