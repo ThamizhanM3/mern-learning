@@ -10,6 +10,7 @@ startStopBtn = document.querySelector('#start');
 resetBtn = document.querySelector('#reset')
 timerCount = document.querySelector('#timer')
 addTask = document.querySelector('#addTask')
+resetTask = document.querySelector('#resetTask')
 category = document.querySelector('#category')
 subCategory = document.querySelector('#subCategory')
 task = document.querySelector('#task')
@@ -106,6 +107,10 @@ function resetTasks(){
     timerCount.textContent = displayTime
 }
 
+function formFilled(){
+    return category.value && subCategory.value && task.value
+}
+
 startStopBtn.addEventListener('click', () => {
     if(!timerStatus){
         timerStatus = true
@@ -133,7 +138,15 @@ resetBtn.addEventListener('click',  () => {
 })
 
 addTask.addEventListener('click', () => {
-    loadData(category.value, subCategory.value, displayTime, task.value)
-    displayTable()
+    if (formFilled()) {
+        loadData(category.value, subCategory.value, displayTime, task.value)
+        displayTable()
+        resetTasks()
+    } else {
+        alert('Fill Details')
+    }
+})
+
+resetTask.addEventListener('click', () => {
     resetTasks()
 })
