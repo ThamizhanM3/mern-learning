@@ -1,0 +1,19 @@
+arithmetic operations
+
+pattern problems: loops
+nth prime, fib, natural
+kth smallest
+arrays: searching, sorting
+string: rotation, permutation, combination
+recursion
+
+study to night:
+    oops
+    c
+javaipoint:
+    java
+
+ds:
+    stack
+    queue
+    linnkedList
