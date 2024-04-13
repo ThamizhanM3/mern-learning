@@ -1,0 +1,183 @@
+show dbs:
+    list all database available
+
+use {db name}:
+    either create db or cconnect to existing db
+
+mongodb is a document db since it follow json model
+
+db.users.insertOne({name: 'Name1'}):
+    creates a collection and insertes the given data 
+
+db.createCollection({'collectionName'}):
+    creates a new collection
+
+db.users.insertOne({name: 'Name2', phone: 123456789, is_active: true, date: new Date()}):
+    all data can be inserted
+
+db.{collectionName}.find({}):
+    returns all elements
+
+db.{collectionName}.find({key:value}):
+    returns the data with the given content
+
+db.users.find({}).sort({name:1}):
+    get the data and sort it in ascending order
+
+db.users.find({}).sort({name:-1}):
+    same but in decending order
+
+CRUD:
+    Create, Read, Update, Delete
+
+db.users.insertMany([{name: 'Name9', phone: 999364781, is_active: false, date: new Date()}, {name: 'Name6', phone: 521759862, is_active: true}, {name: 'Name8', phone: 952314852}]):
+    insert many datas into the collection
+
+db.users.find({name: { $regex: /^Name/i }}):
+    name starts with 'Name'
+
+db.users.updateOne({phone: 123456789}, {$set: {name: 'Thamizhan'}}):
+    update name where phone number given
+
+db.users.updateMany({name: { $regex: /^Name/i }}, {$set: {found: 'Name Started'}}):
+    change or create a field called found and set it to 'Name Started' where the name started with 'Name' {$regex: /^Name/i}
+
+db.users.deleteMany({phone: 123456789}):
+    delete the data where phone is 123456789
+
+db.blogs.drop():
+    delete collection
+
+db.dropDatabase():
+    delete whole database
+
+db.books.insertMany([
+    {
+        title: "Harry Potter and the Philosopher's Stone",
+        author: "J K Rowling",
+        pages: 223,
+        description: "Harry and his friends go on an adventure with the mystorious Philisopher's Stone"
+    },
+    {
+        title: "Harry Potter and the Chamber of Secrets",
+        author: "J K Rowling",
+        pages: 251,
+        description: "Harry and his friends go on an adventure into the Chamber of Secrets"
+    },
+    {
+        title: "Harry Potter and the Prisnor of Azkaban",
+        author: "J K Rowling",
+        pages: 317,
+        description: "Harry and his friends seek the escaped prisoner from Azkaban"
+    },
+    {
+        title: "Harry Potter and the Goblet of Fire",
+        author: "J K Rowling",
+        pages: 636,
+        description: "Harry adventures through the Tri-Wizard Tournament"
+    },
+    {
+        title: "Harry Potter and the Order of the Phoenix",
+        author: "J K Rowling",
+        pages: 766,
+        description: "Harry and his friends join with the Order of the Phoenix against Voldemort"
+    },
+    {
+        title: "Harry Potter and the Half Blood Price",
+        author: "J K Rowling",
+        pages: 607,
+        description: "Harry and his friends find about the half blood Prince"
+    },
+    {
+        title: "Harry Potter and the Deathly Hallows",
+        author: "J K Rowling",
+        pages: 607,
+        description: "Harry and his friends go on an adventure to find about the 3 deathly hallows"
+    },
+    {
+        title: "Diary of a Wimpy Kid",
+        author: "Jeff Kinney",
+        pages: 157,
+        description: "It is a diary written by a middle school kid"
+    },
+    {
+        title: "The Adventures of Captain Underpants",
+        author: "Dev Pilkey",
+        pages: 245,
+        description: "It is a comic that contains adventures of a school pricipal"
+    }
+]):
+    inserts all elements in books collection
+
+db.books.find().count():
+    returns count of books in database
+
+db.books.find({pages: {$gt: 400}}).count():
+    return count of books having more than 400 pages
+
+db.books.find({pages: {$lt: 400}}).count():
+    return count of books having less than 400 pages
+
+db.books.find({ "description": { $exists: true } }):
+    returns count of books that have description
+
+db.books.find({title: /harry/i}):
+    finds books which have title Harry with case insensitive
+
+db.books.aggregate([
+    {
+        $group: {
+            _id: '$author',
+            booksWritten: {
+                $push: {
+                    title: '$title',
+                    description: '$description'
+                }
+            }
+        }
+    }
+]):
+    groups data that have sam author in titles and returns
+
+db.books.aggregate([
+    {
+        $group: {
+            _id: "$author",
+            totalPages: {$sum: "$pages"},
+            booksWritten: { 
+                $push: { 
+                    title: "$title", 
+                    pages: "$pages",
+                    description: '$description'
+                } 
+            },
+        },
+    },
+]):
+    it groups and gives sum of all pages by the author
+
+db.books.aggregate([
+    {
+        $match: {
+            author: {$ne : 'Jeff Kinney'},
+        }
+    },
+    {
+        $group: {
+            _id: "$author",
+            totalPages: {$sum: '$pages'},
+            booksWritten: {
+                $push: {    
+                    title: "$title",
+                    description: '$description'
+                }
+            }
+        }
+    },
+    {
+        $match: {
+            totalPages: { $lt: 1000 }
+        }
+    }
+]):
+    each querry runs in order
