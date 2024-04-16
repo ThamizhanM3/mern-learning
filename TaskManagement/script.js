@@ -120,6 +120,17 @@ startStopBtn.addEventListener('click', () => {
             timing += 1
             timesec = timing %60
             timemin = parseInt(timing / 60)
+            /*
+                timesec += 1
+                if (timesec == 60) {
+                    timesec = 0
+                    timemin += 1
+                }
+                if (timemin == 60) {
+                    timemin = 0
+                    timehr += 1
+                }
+            */
             displayTime = `${timehr.toString().padStart(2, '0')} : ${timemin.toString().padStart(2, '0')} : ${timesec.toString().padStart(2, '0')}`
             timerCount.textContent = displayTime
         }, 1000)

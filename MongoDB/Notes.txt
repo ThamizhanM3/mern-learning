@@ -181,3 +181,5 @@ db.books.aggregate([
     }
 ]):
     each querry runs in order
+
+https://gist.github.com/santhosh-chinnasamy/5880650ad2826c98ba4b72fe5e251fbb
