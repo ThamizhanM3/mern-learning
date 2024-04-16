@@ -7,3 +7,13 @@ post => send some parameter with request
 Status Code
     200 => OK
     401 => Unauthorized
+
+
+// const connectToDB = () =>{
+//     mongoose.connect('mongodb+srv://Mithelesh:MitheleshM3@mithelesh01.yapjwgo.mongodb.net/?retryWrites=true&w=majority&appName=Mithelesh01')
+//     .then(() => {
+//         app.listen(8000, () => {
+//             console.log('App is running on Port: 8000')
+//         })
+//     })
+// }
