@@ -1,0 +1,9 @@
+get =>  send request and get response
+        normal request without sending data
+
+post => send some parameter with request
+        need to send some data with request
+
+Status Code
+    200 => OK
+    401 => Unauthorized
