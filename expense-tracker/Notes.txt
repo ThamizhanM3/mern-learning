@@ -1,0 +1,29 @@
+/**
+ * Functionalities of application
+ * End Points
+ * DB Connection
+ * 
+ */
+
+/**
+ * basic CRUD operations
+ * adding new expense       => /add-expense     => post
+ * view existing expense    => /get-expense     => get
+ * edit existing entries    => /update-expense  => patch
+ * delete exiting entries   => /delete-expense  => delete
+ * 
+ * create new user          => /add-user        => post
+ * validate existing user   => /validate-user   => post
+ * 
+ * monthly analysis
+ * 
+ * DataBase      => Expense Tracker
+ * Collection    => ExpenseDetails
+    *                  amount   => Number
+    *                  category => String
+    *                  date     => String
+    *               UserDetails
+    *                   userName
+    *                   emailId
+    *                   password
+ */
