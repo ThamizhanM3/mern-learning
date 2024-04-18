@@ -7,6 +7,7 @@ post => send some parameter with request
 Status Code
     200 => OK
     401 => Unauthorized
+    403 => Forbidden
 
 
 // const connectToDB = () =>{
