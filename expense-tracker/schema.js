@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const expenseDetailsSchema = new mongoose.Schema({
+    userid: {
+        type: String
+    },
     amount: {
         type: Number
     },
