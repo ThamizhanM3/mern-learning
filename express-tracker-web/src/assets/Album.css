@@ -1,0 +1,11 @@
+/* .Album{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    .box0{
+        width: 200px;
+        margin: 5%;
+    }
+} */
