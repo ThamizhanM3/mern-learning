@@ -62,9 +62,10 @@ const validateUser = async (request, response) => {
             response.status(200).json({
                 "status": "Sucess",
                 "message": "Login Sucessful",
-                "asscessTokken": accessToken,
+                "accessToken": accessToken,
                 "userdetails": userDetails
             })
+            console.log('logged in');
         } else {
             response.status(401).json({
                 "status": "Failure",

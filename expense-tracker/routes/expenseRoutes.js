@@ -30,12 +30,12 @@ const authenticateToken = (request, response, next) => {
     console.log(accessToken);
 }
 
-router.post('/new/:userid', authenticateToken, addExpense)
+router.post('/new/:userid', addExpense)
 
-router.get('/all/:userid', authenticateToken, getExpense)
+router.get('/all/:userid', getExpense)
 
-router.delete('/delete/:id', authenticateToken, deleteExpense)
+router.delete('/delete/:id', deleteExpense)
 
-router.patch('/update/:id', authenticateToken, updateExpense)
+router.patch('/update/:id', updateExpense)
 
 module.exports = router

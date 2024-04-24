@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-const ExpenseForm = ({ addExpense }) => {
+const ExpenseForm = ({ addExpense, removeCookies }) => {
     const [title, setTitle] = useState("");
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState(null);
     const [errors, setErrors] = useState({});
 
     const handleSubmit = (e) => {
@@ -24,7 +24,7 @@ const ExpenseForm = ({ addExpense }) => {
 
         addExpense(title, amount);
         setTitle("");
-        setAmount(0);
+        setAmount("");
     };
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -34,6 +34,11 @@ const ExpenseForm = ({ addExpense }) => {
         setAmount(parseInt(e.target.value));
         setErrors({ ...errors, amount: "" });
     };
+
+    const handleLogout = () => {
+        removeCookies('token')
+        removeCookies('userdetails')
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -58,6 +63,7 @@ const ExpenseForm = ({ addExpense }) => {
                 {errors.amount ? <div className="error">{errors.amount}</div> : null}
             </div>
             <button type="submit">Add Transaction</button>
+            <button type="button" onClick={handleLogout}>Log Out</button>
         </form>
     );
 };

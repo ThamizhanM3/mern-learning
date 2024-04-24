@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseItem from "./components/ExpenseItem";
+import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function Expense() {
-    <h1>Expense Tracker</h1>;
-    const [expenses, setExpenses] = useState([
-        { id: 1, title: "Food", amount: -50 },
-        { id: 2, title: "Movie", amount: -200 },
-        { id: 3, title: "salary", amount: 5000 },
-    ]);
-
+    const [expenses, setExpenses] = useState([]);
     const [calculatedAmount, setCalculatedAmount] = useState({
         amount: 0,
         expense: 0,
         balance: 0,
     });
 
-    const addExpense = (title, amount) => {
-        const nextId = expenses[expenses.length - 1].id + 1;
-        setExpenses([...expenses, { id: nextId, title: title, amount: amount }]);
-    };
-    const deleteExpense = (id) => {
-        setExpenses(expenses.filter((exp) => exp.id !== id));
-    };
-
+    const [cookies, setCookies, removeCookies] = useCookies()
+    
+    useEffect(() => {
+        fetchDetails()
+    }, []);
+    
     useEffect(() => {
         let income = 0,
             expense = 0;
@@ -34,15 +28,51 @@ export default function Expense() {
                 expense += parseFloat(exp.amount);
             }
         });
-
+        
         const balance = income + expense;
-
         setCalculatedAmount({
             income: parseFloat(income),
             expense: parseFloat(expense),
             balance,
         });
     }, [expenses]);
+    
+    const fetchDetails = () => {
+        fetch(`http://localhost:8000/expense/all/${cookies.userdetails.userid}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.token}`
+            }
+        }).then(res => res.json())
+            .then(data => setExpenses(data))
+            .then(() => { console.log(cookies.userdetails.userid); })
+            .catch((err) => { console.log(err); })
+    }
+
+    const addExpense = (title, amount) => {
+        fetch(`http://localhost:8000/expense/new/${cookies.userdetails.userid}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                amount,
+                category: title,
+                userId: "66209ac899a358114911fdbc",
+                date: new Date(),
+            }),
+        }).then(() => {
+            fetchDetails()
+        }).catch((err) => { console.log(err); })
+    };
+
+    const deleteExpense = (id) => {
+        // setExpenses(expenses.filter((exp) => exp.id !== id));
+        fetch(`http://localhost:8000/expense/delete/${id}`, {
+            method: 'delete'
+        }).then(() => {
+            fetchDetails()
+        }).catch((err) => { console.log(err); })
+    };
 
     return (
         <>
@@ -60,14 +90,14 @@ export default function Expense() {
                         <span>{calculatedAmount.expense}</span>
                     </div>
                 </div>
-                <ExpenseForm addExpense={addExpense} />
+                <ExpenseForm addExpense={addExpense} removeCookies={removeCookies} />
             </div>
             {expenses.map((expense) => (
                 <ExpenseItem
                     key={expense.id}
-                    title={expense.title}
+                    title={expense.category}
                     amount={expense.amount}
-                    id={expense.id}
+                    id={expense._id}
                     deleteExpense={deleteExpense}
                 />
             ))}
