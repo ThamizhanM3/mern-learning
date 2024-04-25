@@ -9,44 +9,44 @@ import Login from "./Login";
 import { useCookies } from "react-cookie";
 
 const ProtectedRoute = ({ children }) => {
-  const [cookies] = useCookies()
-  return cookies.token ? children : <Navigate to={'/login'} />
+    const [cookies] = useCookies()
+    return cookies.token ? children : <Navigate to={'/login'} />
 }
 
 const routes = createBrowserRouter([
-  {
-    path: '/expense',
-    // Component: Expense
-    element: (
-      <ProtectedRoute>
-        <Expense />
-      </ProtectedRoute>
-    )
-  },
-  {
-    path: '/album',
-    element: (
-      <ProtectedRoute>
-        <Album />
-      </ProtectedRoute>
-    )
-  },
-  {
-    path: '/',
-    Component: Login
-  },
-  {
-    path: '/login',
-    Component: Login
-  }
+    {
+        path: '/expense',
+        // Component: Expense
+        element: (
+            <ProtectedRoute>
+                <Expense />
+            </ProtectedRoute>
+        )
+    },
+    {
+        path: '/album',
+        element: (
+            <ProtectedRoute>
+                <Album />
+            </ProtectedRoute>
+        )
+    },
+    {
+        path: '/',
+        Component: Login
+    },
+    {
+        path: '/login',
+        Component: Login
+    }
 ])
 
 function App() {
-  return (
-    <div className="App">
-      <RouterProvider router={routes} />
-    </div>
-  );
+    return (
+        <div className="App">
+            <RouterProvider router={routes} />
+        </div>
+    );
 }
 
 export default App;
